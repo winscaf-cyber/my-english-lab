@@ -73,6 +73,13 @@ body {
   margin-bottom: 8px;
 }
 
+.listen-message {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  color: #999999;
+  text-align: right;
+}
+
 .sentence-en {
   font-size: 1.6rem;
   font-weight: 700;

@@ -50,6 +50,81 @@ const listenBtn = document.getElementById("listenBtn");
 const evalUnknown = document.getElementById("evalUnknown");
 const evalMedium = document.getElementById("evalMedium");
 const evalEasy = document.getElementById("evalEasy");
+const listenMessage = document.getElementById("listenMessage");
+
+const speechSupported =
+  "speechSynthesis" in window && typeof SpeechSynthesisUtterance !== "undefined";
+
+let englishVoices = [];
+
+function loadEnglishVoices() {
+  englishVoices = window.speechSynthesis
+    .getVoices()
+    .filter((voice) => voice.lang && voice.lang.toLowerCase().startsWith("en"));
+}
+
+function pickBestEnglishVoice() {
+  if (!englishVoices.length) return null;
+
+  const usVoices = englishVoices.filter((voice) => voice.lang.toLowerCase() === "en-us");
+  const pool = usVoices.length ? usVoices : englishVoices;
+
+  const naturalKeywords = ["Google US English", "Natural", "Neural", "Premium", "Enhanced"];
+  for (const keyword of naturalKeywords) {
+    const match = pool.find((voice) => voice.name.includes(keyword));
+    if (match) return match;
+  }
+
+  return pool[0];
+}
+
+function setListenButtonSpeaking(isSpeaking) {
+  listenBtn.textContent = isSpeaking ? "🔊 재생 중..." : "🔊 듣기";
+}
+
+function showListenMessage(text) {
+  listenMessage.textContent = text;
+  listenMessage.hidden = false;
+}
+
+function stopSpeaking() {
+  if (speechSupported && window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+  }
+  setListenButtonSpeaking(false);
+}
+
+function speakCurrentSentence() {
+  if (!speechSupported) {
+    showListenMessage("이 브라우저는 음성 재생을 지원하지 않아요.");
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(sentences[currentIndex].en);
+  utterance.lang = "en-US";
+
+  const voice = pickBestEnglishVoice();
+  if (voice) {
+    utterance.voice = voice;
+    utterance.lang = voice.lang;
+  }
+
+  utterance.onstart = () => setListenButtonSpeaking(true);
+  utterance.onend = () => setListenButtonSpeaking(false);
+  utterance.onerror = () => setListenButtonSpeaking(false);
+
+  window.speechSynthesis.speak(utterance);
+}
+
+if (speechSupported) {
+  loadEnglishVoices();
+  window.speechSynthesis.onvoiceschanged = loadEnglishVoices;
+} else {
+  listenBtn.disabled = true;
+  showListenMessage("이 브라우저는 음성 재생을 지원하지 않아요.");
+}
 
 function renderSentence() {
   const item = sentences[currentIndex];
@@ -86,6 +161,7 @@ revealBtn.addEventListener("click", () => {
 
 prevBtn.addEventListener("click", () => {
   if (currentIndex > 0) {
+    stopSpeaking();
     currentIndex -= 1;
     renderSentence();
   }
@@ -93,16 +169,14 @@ prevBtn.addEventListener("click", () => {
 
 nextBtn.addEventListener("click", () => {
   if (currentIndex < sentences.length - 1) {
+    stopSpeaking();
     currentIndex += 1;
     renderSentence();
   }
 });
 
 listenBtn.addEventListener("click", () => {
-  listenBtn.textContent = "🔊 (음성 연결 예정)";
-  setTimeout(() => {
-    listenBtn.textContent = "🔊 듣기";
-  }, 1200);
+  speakCurrentSentence();
 });
 
 function setEvaluation(status) {
