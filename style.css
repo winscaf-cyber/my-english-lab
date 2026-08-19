@@ -39,6 +39,181 @@ body {
   padding: 8px 16px 48px;
 }
 
+.prompt-text {
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #333333;
+  margin: 12px 0 20px;
+}
+
+.btn-back {
+  background: none;
+  padding: 8px 4px;
+  min-height: auto;
+  color: #666666;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+/* 대분류 카드 그리드 */
+.category-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.category-card {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 16px;
+  padding: 28px 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-height: 120px;
+}
+
+.category-icon {
+  font-size: 2.2rem;
+}
+
+.category-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+/* 세부 주제 목록 */
+.topic-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.topic-item {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  padding: 16px 18px;
+  min-height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #222222;
+}
+
+.topic-status {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #2d6ae0;
+}
+
+.topic-item-disabled {
+  color: #aaaaaa;
+  cursor: default;
+}
+
+.topic-item-disabled .topic-status {
+  color: #bbbbbb;
+}
+
+/* 학습 화면 상단 바 */
+.study-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 4px;
+}
+
+.study-path {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555555;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-reselect {
+  background: #f0f0f0;
+  color: #444444;
+  padding: 8px 12px;
+  min-height: 36px;
+  font-size: 0.8rem;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+
+/* 결과 요약 화면 */
+.summary-card {
+  text-align: center;
+}
+
+.summary-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 4px 0 6px;
+}
+
+.summary-path {
+  font-size: 0.9rem;
+  color: #777777;
+  margin: 0 0 20px;
+}
+
+.summary-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.summary-stat {
+  background: #f7f7f7;
+  border-radius: 12px;
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summary-num {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #2d6ae0;
+}
+
+.summary-label {
+  font-size: 0.85rem;
+  color: #666666;
+}
+
+.stat-unknown .summary-num {
+  color: #e0553f;
+}
+
+.stat-medium .summary-num {
+  color: #e0a83f;
+}
+
+.stat-easy .summary-num {
+  color: #3fae5c;
+}
+
+.summary-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .progress-row {
   display: flex;
   justify-content: space-between;

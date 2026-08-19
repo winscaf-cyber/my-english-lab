@@ -15,45 +15,101 @@
 
   <main class="app-main">
 
-    <div class="progress-row">
-      <span class="progress-label" id="progressLabel">1 / 5</span>
-      <span class="today-count" id="todayCount">오늘 완료: 0개</span>
-    </div>
-
-    <section class="card" id="sentenceCard">
-      <div class="listen-row">
-        <button class="btn btn-listen" id="listenBtn" type="button">🔊 듣기</button>
-      </div>
-      <p class="listen-message" id="listenMessage" hidden></p>
-
-      <p class="sentence-en" id="sentenceEn"></p>
-
-      <div class="meaning-box" id="meaningBox" hidden>
-        <p class="sentence-kr" id="sentenceKr"></p>
-        <p class="sentence-tip" id="sentenceTip"></p>
-      </div>
-
-      <button class="btn btn-reveal" id="revealBtn" type="button">뜻 보기</button>
-
-      <p class="status-line" id="statusLine" hidden></p>
+    <!-- 홈 화면: 대분류 선택 -->
+    <section class="screen" id="screenHome">
+      <p class="prompt-text">오늘 무엇을 공부할까요?</p>
+      <div class="category-grid" id="categoryGrid"></div>
     </section>
 
-    <div class="nav-row">
-      <button class="btn btn-nav" id="prevBtn" type="button">← 이전</button>
-      <button class="btn btn-nav" id="nextBtn" type="button">다음 →</button>
-    </div>
+    <!-- 세부 주제 선택 화면 -->
+    <section class="screen" id="screenTopics" hidden>
+      <button class="btn btn-back" id="backToHomeBtn" type="button">← 대분류로</button>
+      <p class="prompt-text" id="topicsHeading"></p>
+      <div class="topic-list" id="topicList"></div>
+    </section>
 
-    <section class="eval-section">
-      <p class="eval-title">이 문장, 얼마나 아시나요?</p>
-      <div class="eval-row">
-        <button class="btn btn-eval btn-hard" id="evalUnknown" type="button">모르겠음</button>
-        <button class="btn btn-eval btn-mid" id="evalMedium" type="button">조금 어려움</button>
-        <button class="btn btn-eval btn-easy" id="evalEasy" type="button">알고 있음</button>
+    <!-- 학습 화면 -->
+    <section class="screen" id="screenStudy" hidden>
+
+      <div class="study-topbar">
+        <span class="study-path" id="studyPath"></span>
+        <button class="btn btn-reselect" id="reselectTopicBtn" type="button">주제 다시 선택</button>
       </div>
+
+      <div class="progress-row">
+        <span class="progress-label" id="progressLabel">1 / 5</span>
+        <span class="today-count" id="todayCount">오늘 완료: 0개</span>
+      </div>
+
+      <section class="card" id="sentenceCard">
+        <div class="listen-row">
+          <button class="btn btn-listen" id="listenBtn" type="button">🔊 듣기</button>
+        </div>
+        <p class="listen-message" id="listenMessage" hidden></p>
+
+        <p class="sentence-en" id="sentenceEn"></p>
+
+        <div class="meaning-box" id="meaningBox" hidden>
+          <p class="sentence-kr" id="sentenceKr"></p>
+          <p class="sentence-tip" id="sentenceTip"></p>
+        </div>
+
+        <button class="btn btn-reveal" id="revealBtn" type="button">뜻 보기</button>
+
+        <p class="status-line" id="statusLine" hidden></p>
+      </section>
+
+      <div class="nav-row">
+        <button class="btn btn-nav" id="prevBtn" type="button">← 이전</button>
+        <button class="btn btn-nav" id="nextBtn" type="button">다음 →</button>
+      </div>
+
+      <section class="eval-section">
+        <p class="eval-title">이 문장, 얼마나 아시나요?</p>
+        <div class="eval-row">
+          <button class="btn btn-eval btn-hard" id="evalUnknown" type="button">모르겠음</button>
+          <button class="btn btn-eval btn-mid" id="evalMedium" type="button">조금 어려움</button>
+          <button class="btn btn-eval btn-easy" id="evalEasy" type="button">알고 있음</button>
+        </div>
+      </section>
+
+    </section>
+
+    <!-- 오늘의 결과 요약 화면 -->
+    <section class="screen" id="screenSummary" hidden>
+      <section class="card summary-card">
+        <p class="summary-title">오늘의 학습을 완료했어요!</p>
+        <p class="summary-path" id="summaryPath"></p>
+
+        <div class="summary-stats">
+          <div class="summary-stat">
+            <span class="summary-num" id="summaryTotal">0</span>
+            <span class="summary-label">학습 문장</span>
+          </div>
+          <div class="summary-stat stat-unknown">
+            <span class="summary-num" id="summaryUnknown">0</span>
+            <span class="summary-label">모르겠음</span>
+          </div>
+          <div class="summary-stat stat-medium">
+            <span class="summary-num" id="summaryMedium">0</span>
+            <span class="summary-label">조금 어려움</span>
+          </div>
+          <div class="summary-stat stat-easy">
+            <span class="summary-num" id="summaryEasy">0</span>
+            <span class="summary-label">알고 있음</span>
+          </div>
+        </div>
+
+        <div class="summary-actions">
+          <button class="btn btn-nav" id="summaryTopicBtn" type="button">다른 주제 학습하기</button>
+          <button class="btn btn-nav" id="summaryHomeBtn" type="button">대분류로 돌아가기</button>
+        </div>
+      </section>
     </section>
 
   </main>
 
+  <script src="data.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
